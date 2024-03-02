@@ -20,13 +20,28 @@ class BaseModel:
         updated_at (datetime): Date et heure de modification.
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
         Initialise les attributs communs à toutes les classes:
         """
+        self.created_at = self.updated_at = datetime.now()
         self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+
+        if kwargs is not None and len(kwargs) != 0:
+            for key, value in kwargs.items():
+                if key == 'created_at' or key == 'updated_at':
+                    try:
+                        value = datetime.fromisoformat(value)
+                    except ValueError:
+                        pass
+                '''if key != "__class__":
+                    self.__dict__[key] = value
+                    # setattr(self, key, value)
+                ou :'''
+                self.__dict__[key] = value
+        '''else:
+            self.created_at = self.updated_at = datetime.now()
+            self.id = str(uuid.uuid4())'''
 
     def __str__(self):
         """
