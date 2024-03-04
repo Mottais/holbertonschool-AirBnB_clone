@@ -2,10 +2,7 @@
 """
 Module de la classe BaseModel
 (attributs et fonctions communs à toutes les classes (tables de données)).
-
 """
-
-
 import uuid
 from datetime import datetime
 import models
@@ -14,7 +11,6 @@ import models
 class BaseModel:
     """
     Classe 'BaseModel'.
-
     Attributs communs à toutes les classes:
         id (str): identifiant unique pourchaque instance.
         created_at (datetime): Date et heure de création.
@@ -43,7 +39,6 @@ class BaseModel:
         """
         Retourne une chaine representant l'instance.
         [nom de la classe] (id) {dictionnaire des attributs de l'instance}
-
         """
         return "[{}] ({}) {}".format(self.__class__.__name__,
                                      self.id,
@@ -62,7 +57,6 @@ class BaseModel:
         Ajoute l'attribut '__class__'
         Formate 'created_at' et 'updated_at' au format ISO
         Retourne le dictionnaire.
-
         """
         # créer une copie du dictionnaire __dict__ de l'instance.
         obj_dict = self.__dict__.copy()
