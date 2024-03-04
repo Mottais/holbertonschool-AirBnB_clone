@@ -1,17 +1,20 @@
 #!/usr/bin/python3
+import cmd
 
-class HBNBCommand (cmd.Cmd):
- """Simple command interpreter for HBNB project."""
- prompt = "(hbnb) "
+class HBNBCommand(cmd.Cmd):
+    """Command interpreter for managing AirBnB objects."""
 
+    prompt = "(HBNB) "
 
-def do_quit(self, arg):
-    """Exit the program"""
-    return True
+    def do_quit(self, arg):
+        """Exit the program."""
+        print("Goodbye!")
+        return True
 
-def do_EOF(self, arg):
-    """Exit the program on EOF (ctrl+D)"""
-    print("\nGoodbye!")
-    return True
+    def do_EOF(self, arg):
+        """Exit the program on EOF (Ctrl-D)."""
+        print("\nGoodbye!")
+        return True
 
-def emptyline(self)
+if __name__ == "__main__":
+    HBNBCommand().cmdloop()
