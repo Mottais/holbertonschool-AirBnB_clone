@@ -27,12 +27,7 @@ class FileStorage:
     def reload(self):
         """Deserializes the JSON file to __objects' dictionary'"""
         from models.base_model import BaseModel
-        from models.user import User
-        from models.state import State
-        from models.city import City
-        from models.review import Review
-        from models.amenity import Amenity
-        from models.place import Place
+
         try:
             with open(self.__file_path, "r") as file:
                 for key, value in json.load(file).items():
