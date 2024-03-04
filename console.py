@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 import cmd
 
+
 class HBNBCommand(cmd.Cmd):
     """Command interpreter for managing AirBnB objects."""
 
-    prompt = "(HBNB) "
+    prompt = "(hbnb) "
 
     def do_quit(self, arg):
         """Exit the program."""
@@ -15,6 +16,7 @@ class HBNBCommand(cmd.Cmd):
         """Exit the program on EOF (Ctrl-D)."""
         print("\nGoodbye!")
         return True
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
