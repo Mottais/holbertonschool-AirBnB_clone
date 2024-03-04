@@ -8,6 +8,7 @@ Module de la classe BaseModel
 
 import uuid
 from datetime import datetime
+import models
 
 
 class BaseModel:
@@ -34,14 +35,9 @@ class BaseModel:
                         value = datetime.fromisoformat(value)
                     except ValueError:
                         pass
-                '''if key != "__class__":
-                    self.__dict__[key] = value
-                    # setattr(self, key, value)
-                ou :'''
                 self.__dict__[key] = value
-        '''else:
-            self.created_at = self.updated_at = datetime.now()
-            self.id = str(uuid.uuid4())'''
+        else:
+            models.storage.new(self)
 
     def __str__(self):
         """
@@ -58,6 +54,7 @@ class BaseModel:
         Modifie l'attribute 'updated_at' avec date et heure actuelles.
         """
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """
