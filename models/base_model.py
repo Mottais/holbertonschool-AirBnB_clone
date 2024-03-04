@@ -1,41 +1,41 @@
 #!/usr/bin/python3
-"""Definition of class basemodel"""
-import uuid
-from datetime import datetime
-import models
+"""definition of class used to store objects"""
+import json
 
 
-class BaseModel:
-    """Definition of class basemodel"""
+class FileStorage:
+    __file_path = "file.json"
+    __objects = {}
 
-    def __init__(self, *args, **kwargs):
-        """Initialize a new BaseModel."""
-        if kwargs is not None and len(kwargs) != 0:
-            for key, value in kwargs.items():
-                if key in ['created_at', 'updated_at']:
-                    value = datetime.fromisoformat(value)
-                if key != "__class__":
-                    setattr(self, key, value)
-        else:
-            self.created_at = self.updated_at = datetime.now()
-            self.id = str(uuid.uuid4())
-            models.storage.new(self)
+    def all(self):
+        """Returns a dictionaty '__objects'"""
+        return self.__objects
 
-    def __str__(self):
-        """return string representation of the object"""
-        return "[{}] ({}) {}".format(self.__class__.__name__,
-                                     self.id, self.__dict__)
+    def new(self, obj):
+        """Sets in '__objects' the object with the key """
+        index = "{}.{}".format(obj.__class__.__name__, obj.id)
+        self.__objects[index] = obj
 
     def save(self):
-        """update the time"""
-        self.updated_at = datetime.now()
-        models.storage.new(self)
-        models.storage.save()
+        """Serializes '__objects' dictionary to a JSON file"""
+        dict_to_save = {}
+        for key, obj in self.__objects.items():
+            dict_to_save[key] = obj.to_dict()
+        with open(self.__file_path, "w") as file:
+            json.dump(dict_to_save, file)
 
-    def to_dict(self):
-        """returns list of attributes including class name"""
-        dict_copy = self.__dict__.copy()
-        dict_copy["__class__"] = self.__class__.__name__
-        dict_copy["created_at"] = self.created_at.isoformat()
-        dict_copy["updated_at"] = self.updated_at.isoformat()
-        return dict_copy
+    def reload(self):
+        """Deserializes the JSON file to __objects' dictionary'"""
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.review import Review
+        from models.amenity import Amenity
+        from models.place import Place
+        try:
+            with open(self.__file_path, "r") as file:
+                for key, value in json.load(file).items():
+                    self.__objects[key] = eval(value["__class__"])(**value)
+        except Exception:
+            pass
