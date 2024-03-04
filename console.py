@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+Console
+"""
 import cmd
 
 
