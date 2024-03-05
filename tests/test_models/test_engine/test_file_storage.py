@@ -13,20 +13,7 @@ class Test_FileStorage(unittest.TestCase):
     def setUpClass(selt):
         """Class method to open test's environment"""
         selt.storage = FileStorage()
-        try:
-            os.rename(FileStorage._FileStorage__file_path, "test_file.json")
-        except Exception:
-            pass
-
-    '''@classmethod
-    def tearDownClass(selt):
-        """Class method to close test's environment"""
-        try:
-            os.remove(FileStorage._FileStorage__file_path)
-            os.rename("test_file.json", FileStorage._FileStorage__file_path)
-        except Exception:
-            pass'''
-
+        
     def test_all(self):
         """Test case for 'all' method"""
         self.assertIsInstance(self.storage.all(), dict)
