@@ -30,7 +30,7 @@ class FileStorage:
         try:
             with open(self.__file_path, "r") as file:
                 for key, value in json.load(file).items():
-                    module = importlib.import_module('models.base_model')
+                    module = importlib.import_module('models')
                     fonction = getattr(module, value["__class__"], None)
                     self.__objects[key] = fonction(**value)
         except Exception:
