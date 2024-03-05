@@ -1,31 +1,31 @@
 #!/usr/bin/python3
-"""Unittest for FileStorage class"""
+"""Unittest Classe FileStorage"""
 import unittest
 import os
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
 
-class TestFileStorage(unittest.TestCase):
+class Test_FileStorage(unittest.TestCase):
     """Test cases for FileStorage class"""
 
-    @classmethod
-    def setUpClass(cls):
+    '''@classmethod
+    def setUpClass(selt):
         """Class method to open test's environment"""
-        cls.storage = FileStorage()
+        selt.storage = FileStorage()
         try:
             os.rename(FileStorage._FileStorage__file_path, "test_file.json")
         except Exception:
             pass
 
     @classmethod
-    def tearDownClass(cls):
+    def tearDownClass(selt):
         """Class method to close test's environment"""
         try:
             os.remove(FileStorage._FileStorage__file_path)
             os.rename("test_file.json", FileStorage._FileStorage__file_path)
         except Exception:
-            pass
+            pass'''
 
     def test_all(self):
         """Test case for 'all' method"""
