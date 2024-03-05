@@ -34,7 +34,7 @@ class BaseModel:
                     try:
                         value = datetime.fromisoformat(value)
                     except ValueError:
-                        pass
+                        value = datetime.now()
                 self.__dict__[key] = value
         else:
             models.storage.new(self)
