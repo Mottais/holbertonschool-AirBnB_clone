@@ -9,7 +9,7 @@ from models.engine.file_storage import FileStorage
 class Test_FileStorage(unittest.TestCase):
     """Test cases for FileStorage class"""
 
-    '''@classmethod
+    @classmethod
     def setUpClass(selt):
         """Class method to open test's environment"""
         selt.storage = FileStorage()
@@ -25,7 +25,7 @@ class Test_FileStorage(unittest.TestCase):
             os.remove(FileStorage._FileStorage__file_path)
             os.rename("test_file.json", FileStorage._FileStorage__file_path)
         except Exception:
-            pass'''
+            pass
 
     def test_all(self):
         """Test case for 'all' method"""
