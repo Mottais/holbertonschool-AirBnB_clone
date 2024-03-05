@@ -18,14 +18,14 @@ class Test_FileStorage(unittest.TestCase):
         except Exception:
             pass
 
-    @classmethod
+    '''@classmethod
     def tearDownClass(selt):
         """Class method to close test's environment"""
         try:
             os.remove(FileStorage._FileStorage__file_path)
             os.rename("test_file.json", FileStorage._FileStorage__file_path)
         except Exception:
-            pass
+            pass'''
 
     def test_all(self):
         """Test case for 'all' method"""
