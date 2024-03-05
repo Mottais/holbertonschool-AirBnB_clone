@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """definition of class used to store objects"""
 import json
-import importlib
 
 
 class FileStorage:
@@ -27,11 +26,16 @@ class FileStorage:
 
     def reload(self):
         """Deserializes the JSON file to __objects' dictionary'"""
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.review import Review
+        from models.amenity import Amenity
+        from models.place import Place
         try:
             with open(self.__file_path, "r") as file:
                 for key, value in json.load(file).items():
-                    module = importlib.import_module('models')
-                    fonction = getattr(module, value["__class__"], None)
-                    self.__objects[key] = fonction(**value)
+                    self.__objects[key] = eval(value["__class__"])(**value)
         except Exception:
             pass
