@@ -1,10 +1,19 @@
 #!/usr/bin/python3
-"""definition of class used to store objects"""
+"""
+class used to store objects in a json file at the end of the program
+and create objet from the file at the start of the program
+- all: returns the dictionary '__objects'
+- new: sets in '__objects' the object with the key
+- save: serializes '__objects' to a JSON file
+- reload: deserializes the JSON file to '__objects'
+"""
+
 import json
 import importlib
 
 
 class FileStorage:
+    """definition of class used to store objects"""
     __file_path = "file.json"
     __objects = {}
 

@@ -114,7 +114,7 @@ class HBNBCommand(cmd.Cmd):
                            "Place", "City", "Amenity"):
             print("** class doesn't exist **")
             return
-        
+
         try:
             obj_id = args[1]
             obj = storage.all().get(f"{args[0]}.{obj_id}")

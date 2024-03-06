@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """
+-
 Module de la classe BaseModel
 (attributs et fonctions communs à toutes les classes (tables de données)).
-
+-
 """
 
 
@@ -14,7 +15,6 @@ import models
 class BaseModel:
     """
     Classe 'BaseModel'.
-
     Attributs communs à toutes les classes:
         id (str): identifiant unique pourchaque instance.
         created_at (datetime): Date et heure de création.
