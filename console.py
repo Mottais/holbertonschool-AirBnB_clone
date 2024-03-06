@@ -10,20 +10,19 @@ class HBNBCommand(cmd.Cmd):
     """Command interpreter for managing AirBnB objects."""
     prompt = "(hbnb) "
 
-    def emptyline(self):
-        """
-        Handles empty line
-        """
-        pass
-
     def do_quit(self, arg):
         """Quit command to exit the program"""
         return True
 
     def do_EOF(self, arg):
         """Exit the program on EOF (Ctrl-D)."""
-        print()
         return True
+
+    def emptyline(self):
+        """
+        Handles empty line
+        """
+        pass
 
     def do_create(self, arg):
         """Create a new instance of BaseModel and save it to the JSON file."""
@@ -77,15 +76,15 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """Print all string representations of instances."""
         objs = storage.all()
+        args = arg.split()
         if not arg:
             print([str(obj) for obj in objs.values()])
+        elif args[0] in ("BaseModel", "User", "State", "Review ",
+                         "Place", "City", "Amenity"):
+            print([str(obj) for obj in objs.values()
+                   if obj.__class__.__name__ == args[0]])
         else:
-            try:
-                class_name = arg.split()[0]
-                print([str(obj) for obj in objs.values()
-                       if obj.__class__.__name__ == class_name])
-            except AttributeError:
-                print("** class doesn't exist **")
+            print("** class doesn't exist **")
 
     def do_update(self, arg):
         """Update an instance's attribute."""
