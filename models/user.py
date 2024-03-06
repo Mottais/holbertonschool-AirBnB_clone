@@ -10,10 +10,9 @@ class User(BaseModel):
     first_name = ""
     last_name = ""
 
-    ''' Je ne comprends pas pourquoi ces attributs sont de Classe publique
-    Ils ne servent à rien.
+    ''' Je ne comprends pas pourquoi ces attributs
+    sont de Classe publique. Ils ne servent à rien.
     ci-dessous, une version qui me semble plus judicieuse
-
     def __init__(self, *args, **kwargs):
         """Initialize user"""
         super().__init__(*args, **kwargs)
