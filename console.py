@@ -50,7 +50,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        if args[0] not in ("BaseModel", "User", "State", "Review ",
+        if args[0] not in ("BaseModel", "User", "State", "Review",
                            "Place", "City", "Amenity"):
             print("** class doesn't exist **")
             return
@@ -92,7 +92,7 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if not arg:
             print([str(obj) for obj in objs.values()])
-        elif args[0] in ("BaseModel", "User", "State", "Review ",
+        elif args[0] in ("BaseModel", "User", "State", "Review",
                          "Place", "City", "Amenity"):
             print([str(obj) for obj in objs.values()
                    if obj.__class__.__name__ == args[0]])
