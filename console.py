@@ -31,7 +31,10 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-        """Create a new instance of BaseModel and save it to the JSON file."""
+        """
+        Create a new instance of BaseModel
+        and save it to the JSON file.
+        """
         if not arg:
             print("** class name missing **")
             return
@@ -114,13 +117,19 @@ class HBNBCommand(cmd.Cmd):
                            "Place", "City", "Amenity"):
             print("** class doesn't exist **")
             return
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
 
         try:
             obj_id = args[1]
             obj = storage.all().get(f"{args[0]}.{obj_id}")
             if obj:
-                if len(args) < 4:
+                if len(args) < 3:
                     print("** attribute name missing **")
+                    return
+                if len(args) < 4:
+                    print("** value missing **")
                     return
                 attr_name = args[2]
                 attr_value = args[3]
