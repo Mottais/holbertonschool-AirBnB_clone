@@ -32,7 +32,7 @@ class test_Basemodel(unittest.TestCase):
         self.assertTrue(my_new_base is not base)
         self.assertTrue(my_new_base.created_at == base.created_at)
 
-        """my_model_json["updated_at"] = 'toto'"""
+        my_model_json["updated_at"] = 'toto'
         my_new_base1 = BaseModel(**my_model_json)
         self.assertIsInstance(my_new_base1.updated_at, datetime)
 

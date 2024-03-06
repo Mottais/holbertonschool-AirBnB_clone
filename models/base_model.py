@@ -1,41 +1,80 @@
 #!/usr/bin/python3
-"""Definition of class basemodel"""
+"""
+Module de la classe BaseModel
+(attributs et fonctions communs à toutes les classes (tables de données)).
+
+"""
+
+
 import uuid
 from datetime import datetime
 import models
 
 
 class BaseModel:
-    """Definition of class basemodel"""
+    """
+    Classe 'BaseModel'.
+
+    Attributs communs à toutes les classes:
+        id (str): identifiant unique pourchaque instance.
+        created_at (datetime): Date et heure de création.
+        updated_at (datetime): Date et heure de modification.
+    """
 
     def __init__(self, *args, **kwargs):
-        """Initialize a new BaseModel."""
+        """
+        Initialise les attributs communs à toutes les classes:
+        """
+        self.created_at = self.updated_at = datetime.now()
+        self.id = str(uuid.uuid4())
+
         if kwargs is not None and len(kwargs) != 0:
             for key, value in kwargs.items():
-                if key in ['created_at', 'updated_at']:
-                    value = datetime.fromisoformat(value)
-                if key != "__class__":
-                    setattr(self, key, value)
+                if key == 'created_at' or key == 'updated_at':
+                    try:
+                        value = datetime.fromisoformat(value)
+                    except ValueError:
+                        value = datetime.now()
+                self.__dict__[key] = value
         else:
-            self.created_at = self.updated_at = datetime.now()
-            self.id = str(uuid.uuid4())
             models.storage.new(self)
 
     def __str__(self):
-        """return string representation of the object"""
+        """
+        Retourne une chaine representant l'instance.
+        [nom de la classe] (id) {dictionnaire des attributs de l'instance}
+
+        """
         return "[{}] ({}) {}".format(self.__class__.__name__,
-                                     self.id, self.__dict__)
+                                     self.id,
+                                     self.__dict__)
 
     def save(self):
-        """update the time"""
+        """
+        Modifie l'attribute 'updated_at' avec date et heure actuelles.
+        """
         self.updated_at = datetime.now()
-        models.storage.new(self)
         models.storage.save()
 
     def to_dict(self):
-        """returns list of attributes including class name"""
-        dict_copy = self.__dict__.copy()
-        dict_copy["__class__"] = self.__class__.__name__
-        dict_copy["created_at"] = self.created_at.isoformat()
-        dict_copy["updated_at"] = self.updated_at.isoformat()
-        return dict_copy
+        """
+        Crée un dictionnaire contenant tous les attributs de l'instance.
+        Ajoute l'attribut '__class__'
+        Formate 'created_at' et 'updated_at' au format ISO
+        Retourne le dictionnaire.
+
+        """
+        # créer une copie du dictionnaire __dict__ de l'instance.
+        obj_dict = self.__dict__.copy()
+
+        # Ajoute l'attribut '__class__' avec le nom de la classe.
+        obj_dict['__class__'] = self.__class__.__name__
+
+        # Formate 'created_at' au format ISO
+        obj_dict['created_at'] = self.created_at.strftime(
+            '%Y-%m-%dT%H:%M:%S.%f')
+
+        # Formate 'updated_at' au format ISO (via la méthode 'isoformat')
+        obj_dict['updated_at'] = self.updated_at.isoformat()
+
+        return obj_dict
