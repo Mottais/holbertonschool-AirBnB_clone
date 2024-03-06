@@ -2,8 +2,14 @@
 """ Console """
 
 import cmd
-from models.base_model import BaseModel
 from models import storage
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -29,8 +35,9 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             print("** class name missing **")
             return
+        args = arg.split()
         try:
-            new_instance = eval(arg)()
+            new_instance = eval(args[0])()
             new_instance.save()
             print(new_instance.id)
         except NameError:
