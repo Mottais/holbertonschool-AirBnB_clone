@@ -5,6 +5,7 @@ import cmd
 from models.base_model import BaseModel
 from models import storage
 
+
 class HBNBCommand(cmd.Cmd):
     """Command interpreter for managing AirBnB objects."""
     prompt = "(hbnb) "
@@ -74,7 +75,8 @@ class HBNBCommand(cmd.Cmd):
         else:
             try:
                 class_name = arg.split()[0]
-                print([str(obj) for obj in objs.values() if obj.__class__.__name__ == class_name])
+                print([str(obj) for obj in objs.values()
+                       if obj.__class__.__name__ == class_name])
             except AttributeError:
                 print("** class doesn't exist **")
 
@@ -101,6 +103,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         except AttributeError:
             print("** class doesn't exist **")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
