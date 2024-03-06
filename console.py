@@ -10,6 +10,12 @@ class HBNBCommand(cmd.Cmd):
     """Command interpreter for managing AirBnB objects."""
     prompt = "(hbnb) "
 
+    def emptyline(self):
+        """
+        Handles empty line
+        """
+        pass
+
     def do_quit(self, arg):
         """Quit command to exit the program"""
         return True
