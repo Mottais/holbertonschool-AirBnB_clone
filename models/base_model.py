@@ -64,17 +64,18 @@ class BaseModel:
         Retourne le dictionnaire.
 
         """
-        # créer une copie du dictionnaire __dict__ de l'instance.
+
+        '''créer une copie du dictionnaire __dict__ de l'instance.'''
         obj_dict = self.__dict__.copy()
 
-        # Ajoute l'attribut '__class__' avec le nom de la classe.
+        '''Ajoute l'attribut '__class__' avec le nom de la classe.'''
         obj_dict['__class__'] = self.__class__.__name__
 
-        # Formate 'created_at' au format ISO
+        '''Formate 'created_at' au format ISO'''
         obj_dict['created_at'] = self.created_at.strftime(
             '%Y-%m-%dT%H:%M:%S.%f')
 
-        # Formate 'updated_at' au format ISO (via la méthode 'isoformat')
+        '''Formate 'updated_at' au format ISO (via la méthode 'isoformat')'''
         obj_dict['updated_at'] = self.updated_at.isoformat()
 
         return obj_dict
