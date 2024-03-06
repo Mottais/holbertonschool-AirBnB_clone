@@ -50,6 +50,11 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
+        if args[0] not in ("BaseModel", "User", "State", "Review ",
+                           "Place", "City", "Amenity"):
+            print("** class doesn't exist **")
+            return
+
         try:
             obj_id = args[1]
             obj = storage.all().get(f"{args[0]}.{obj_id}")
