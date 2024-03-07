@@ -20,7 +20,11 @@ Python 3.8
 ## Usage/Examples
 Type a command on terminal; for example :
 ```code
-console.py ./help
+console.py
+
+help (for help)
+create User (to create user)
+all (to print all)
 
 ```## AUTHORS
 
