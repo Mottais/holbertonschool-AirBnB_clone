@@ -76,6 +76,7 @@ button:hover {
 .amenities:hover .popover,
 .locations:hover .popover {
 	display: block;
+	z-index: 1;
 }
 .locations .popover h2 {
 	font-size: 16px;
